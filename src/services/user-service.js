@@ -37,6 +37,15 @@ class UserService {
     }
   }
 
+  isAdmin(userId) {
+    try {
+      return this.userRepository.isAdmin(userId);
+    } catch (error) {
+      console.log("Something went wrong in service Layer ");
+      throw error;
+    }
+  }
+
   async isAuthenticated(token) {
     try {
       const response = this.verifyToken(token);

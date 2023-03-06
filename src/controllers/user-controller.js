@@ -50,6 +50,27 @@ const signIn = async (req, res) => {
   }
 };
 
+const isAdmin = async (req, res) => {
+  try {
+    const response = await userService.isAdmin(req.body.id);
+    return res.status(200).json({
+      data: response,
+      success: true,
+      message: "Sucessfully fetch whether the user is admin or not",
+      err: {},
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      success: false,
+      message: "Some thing went wrong in Controller ",
+      err: error,
+
+      data: {},
+    });
+  }
+};
+
 const isAuthenticated = async (req, res) => {
   try {
     const token = req.headers["x-access-token"];
@@ -75,4 +96,5 @@ module.exports = {
   create,
   signIn,
   isAuthenticated,
+  isAdmin,
 };
